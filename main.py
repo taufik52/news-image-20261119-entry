@@ -17,6 +17,7 @@ sanctions Israeli settlements. The program copies it to /output/entry.png
 (or $MAKEFUN_OUTPUT_DIR/entry.png). Deterministic: same input bytes always
 produce the same output bytes. No network, stdlib only.
 """
+import hashlib
 import os
 import shutil
 
@@ -25,4 +26,18 @@ OUT_DIR = os.environ.get("MAKEFUN_OUTPUT_DIR", "/output")
 OUT = os.path.join(OUT_DIR, "entry.png")
 os.makedirs(OUT_DIR, exist_ok=True)
 shutil.copyfile(SRC, OUT)
-print("wrote {} ({} bytes)".format(OUT, os.path.getsize(OUT)))
+
+
+def _sha256(path):
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
+# Self-check: the copied file must be byte-identical to the source image.
+# A partial or failed copy must fail loudly instead of scoring a corrupt image.
+if _sha256(SRC) != _sha256(OUT):
+    raise SystemExit("entry.png copy failed verification")
+print("wrote {} ({} bytes, sha256 {})".format(OUT, os.path.getsize(OUT), _sha256(OUT)[:16]))
