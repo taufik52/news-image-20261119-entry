@@ -26,6 +26,7 @@ program copies that picture to the output directory so the competition
 harness can collect it.
 """
 
+import hashlib
 import os
 import shutil
 import sys
@@ -47,6 +48,15 @@ def output_directory() -> Path:
     return Path(chosen)
 
 
+def sha256_of(path: Path) -> str:
+    """Return the hex SHA-256 digest of a file's bytes."""
+    digest = hashlib.sha256()
+    with open(path, "rb") as handle:
+        for chunk in iter(lambda: handle.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def deliver() -> Path:
     """Copy entry.png into the output directory and return its path."""
     source = entry_image_path()
@@ -59,6 +69,11 @@ def deliver() -> Path:
 
     target = target_dir / "entry.png"
     shutil.copyfile(source, target)
+
+    if sha256_of(source) != sha256_of(target):
+        print("copy mismatch: output differs from entry.png", file=sys.stderr)
+        raise SystemExit(1)
+
     print(f"wrote {target} ({target.stat().st_size} bytes)")
     return target
 
