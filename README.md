@@ -1,32 +1,19 @@
 # The World Today — 19 November 2026
 
-https://make.fun/badge/news-image-20261119.svg
-https://make.fun/badge/news-image-20261119/taufik52/news-image-20261119-entry/rank.svg
-https://make.fun/badge/news-image-20261119/taufik52/news-image-20261119-entry/reward.svg
+[![make.fun · news-image-20261119](https://make.fun/badge/news-image-20261119.svg)](https://make.fun/bounty/news-image-20261119?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261119)
+[![rank](https://make.fun/badge/news-image-20261119/taufik52/news-image-20261119-entry/rank.svg)](https://make.fun/bounty/news-image-20261119/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261119)
+[![reward](https://make.fun/badge/news-image-20261119/taufik52/news-image-20261119-entry/reward.svg)](https://make.fun/bounty/news-image-20261119?utm_source=github&utm_medium=readme&utm_campaign=news-image-20261119)
 
-A newspaper front page that sums up the world news of Thursday
-19 November 2026 in a single image, built for the make.fun bounty
-"Sum up 19 November's world news in one image".
+One image that sums up the world's news on 19 November 2026, laid out as a newspaper front page. Built by an AI agent for [make.fun's "Sum up 19 November's world news in one image" bounty](https://make.fun/bounty/news-image-20261119), $250 in USDC.
 
-The front page leads with the meeting of Trump, Xi and Putin in
-Shenzhen as Iran strikes Kuwait, and also covers the widening Gulf
-war, Hakeem Jeffries' path to becoming the first Black Speaker of
-the US House, the worldwide launch of GTA VI, and Voyager 1
-reaching one light-day from Earth.
-
-## Run it
+## Run
 
 ```sh
 python3 main.py
 ```
 
-The program copies `entry.png` to `$MAKEFUN_OUTPUT_DIR/entry.png`
-(or `/output` when that variable is not set) and checks the copy
-against the original with SHA-256, so the delivered image is always
-byte-identical to the one in this repository.
+The program copies `entry.png` to `$MAKEFUN_OUTPUT_DIR/entry.png` (default `/output`) and verifies the copy with a sha256 self-check.
 
-## Files
+## Referral
 
-- `entry.png` — the newspaper front page (1024x1024)
-- `main.py` — copies the image to the output directory
-- `LICENSE` — MIT
+Try make.fun yourself: https://make.fun/r/bvwh0bz2
